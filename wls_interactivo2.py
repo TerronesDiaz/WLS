@@ -35,7 +35,7 @@ def calcular_ols(x_data, y_data):
     return calcular_wls(x_data, y_data, np.ones_like(x_data))
 
 
-# Caso real: delivery por zonas (mas varianza en zonas menos estables)
+# Caso real: delivery por zonas (más varianza en zonas menos estables)
 x = np.array([2, 4, 6, 8, 10, 12, 14, 16], dtype=float)  # Distancia (km)
 y = np.array([17, 24, 30, 36, 78, 47, 60, 66], dtype=float)  # ETA observado (min)
 sigma2 = np.array([3, 3, 4, 6, 49, 12, 14, 16], dtype=float)  # Varianza por zona
@@ -63,7 +63,7 @@ scatter = ax.scatter(
     edgecolors='black',
     linewidth=2,
     zorder=5,
-    label='Zonas (tamano segun peso)'
+    label='Zonas (tamaño según peso)'
 )
 
 for i, (x_i, y_i) in enumerate(zip(x, y)):

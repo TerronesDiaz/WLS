@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Menu principal para abrir los casos interactivos de WLS.
+Menú principal para abrir los casos interactivos de WLS.
 """
 
 from pathlib import Path
@@ -27,10 +27,10 @@ def abrir_script(nombre_script):
 
 
 def crear_menu():
-    """Crea la ventana principal del menu."""
+    """Crea la ventana principal del menú."""
     root = tk.Tk()
-    root.title("WLS - Menu de Casos")
-    root.geometry("1024x720")
+    root.title("WLS - Menú de Casos")
+    root.geometry("1280x860")
     root.resizable(False, False)
     root.configure(bg="#eef3f8")
 
@@ -41,7 +41,7 @@ def crear_menu():
     titulo = tk.Label(
         header,
         text="Laboratorio Interactivo WLS",
-        font=("Segoe UI", 28, "bold"),
+        font=("Segoe UI", 30, "bold"),
         fg="white",
         bg="#1f3b57"
     )
@@ -50,7 +50,7 @@ def crear_menu():
     subtitulo = tk.Label(
         header,
         text="Selecciona un caso para explorar OLS vs WLS",
-        font=("Segoe UI", 16),
+        font=("Segoe UI", 17),
         fg="#d9e6f2",
         bg="#1f3b57"
     )
@@ -61,8 +61,8 @@ def crear_menu():
 
     descripcion = tk.Label(
         contenido,
-        text="Cada boton abre una ventana interactiva independiente.",
-        font=("Segoe UI", 16),
+        text="Cada botón abre una ventana interactiva independiente.",
+        font=("Segoe UI", 17),
         fg="#3b4b5a",
         bg="#eef3f8"
     )
@@ -74,7 +74,7 @@ def crear_menu():
     caso1_titulo = tk.Label(
         card1,
         text="Caso 1 - Sensores de temperatura",
-        font=("Segoe UI", 18, "bold"),
+        font=("Segoe UI", 19, "bold"),
         fg="#1f3b57",
         bg="white"
     )
@@ -83,11 +83,11 @@ def crear_menu():
     caso1_info = tk.Label(
         card1,
         text=(
-            "Problema: varios sensores miden la misma variable con distinta precision.\n"
+            "Problema: varios sensores miden la misma variable con distinta precisión.\n"
             "Objetivo: ajustar una recta que priorice sensores confiables y reduzca el impacto\n"
             "de mediciones ruidosas mediante pesos."
         ),
-        font=("Segoe UI", 14),
+        font=("Segoe UI", 15),
         fg="#334455",
         justify="left",
         anchor="w",
@@ -99,7 +99,7 @@ def crear_menu():
     btn_case_1 = tk.Button(
         card1,
         text="Abrir Caso 1 (wls_interactivo.py)",
-        font=("Segoe UI", 15, "bold"),
+        font=("Segoe UI", 16, "bold"),
         bg="#2f7dc1",
         fg="white",
         activebackground="#2769a2",
@@ -117,8 +117,8 @@ def crear_menu():
 
     caso2_titulo = tk.Label(
         card2,
-        text="Caso 2 - Delivery (ETA vs distancia)",
-        font=("Segoe UI", 18, "bold"),
+        text="Caso 2 - Delivery (\"ETA\" vs distancia)",
+        font=("Segoe UI", 19, "bold"),
         fg="#1f3b57",
         bg="white"
     )
@@ -128,10 +128,11 @@ def crear_menu():
         card2,
         text=(
             "Problema: estimar tiempo de entrega por distancia cuando algunas zonas tienen\n"
-            "alta variabilidad por trafico, clima y demanda.\n"
-            "Objetivo: comparar OLS vs WLS para obtener predicciones de ETA mas robustas."
+            "alta variabilidad por tráfico, clima y demanda.\n"
+            "Objetivo: comparar OLS vs WLS para obtener predicciones de ETA\n"
+            "(Estimated Time of Arrival) más robustas."
         ),
-        font=("Segoe UI", 14),
+        font=("Segoe UI", 15),
         fg="#334455",
         justify="left",
         anchor="w",
@@ -143,7 +144,7 @@ def crear_menu():
     btn_case_2 = tk.Button(
         card2,
         text="Abrir Caso 2 (wls_interactivo2.py)",
-        font=("Segoe UI", 15, "bold"),
+        font=("Segoe UI", 16, "bold"),
         bg="#2ba86a",
         fg="white",
         activebackground="#228654",
@@ -162,7 +163,7 @@ def crear_menu():
     btn_salir = tk.Button(
         footer,
         text="Salir",
-        font=("Segoe UI", 14, "bold"),
+        font=("Segoe UI", 15, "bold"),
         width=18,
         relief="groove",
         cursor="hand2",

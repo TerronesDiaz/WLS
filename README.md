@@ -1,7 +1,7 @@
-# Recurso Interactivo: Minimos Cuadrados Ponderados (WLS)
+# Recurso Interactivo: Mínimos Cuadrados Ponderados (WLS)
 
 **Autor:** Francisco Terrones  
-**Proyecto:** Metodos de Minimos Cuadrados Ponderados  
+**Proyecto:** Métodos de Mínimos Cuadrados Ponderados  
 **Equipo:** Nora, Ocampo, Pablo, Terrones
 
 ---
@@ -10,38 +10,38 @@
 
 Este proyecto compara **OLS** y **WLS** con dos casos interactivos:
 
-- **Caso 1 (sensores):** mediciones con distinta precision.
+- **Caso 1 (sensores):** mediciones con distinta precisión.
 - **Caso 2 (delivery):** ETA vs distancia con zonas de distinta variabilidad.
 
-Objetivo: mostrar por que WLS mejora el ajuste cuando hay heterocedasticidad.
+Objetivo: mostrar por qué WLS mejora el ajuste cuando hay heterocedasticidad.
 
 ---
 
 ## Archivos principales
 
-| Archivo | Descripcion |
+| Archivo | Descripción |
 |---------|-------------|
-| `menu_casos.py` | Menu principal para abrir los casos |
+| `menu_casos.py` | Menú principal para abrir los casos |
 | `wls_interactivo.py` | Caso 1: sensores |
 | `wls_interactivo2.py` | Caso 2: delivery |
 | `requirements.txt` | Dependencias |
 
 ---
 
-## Instalacion
+## Instalación
 
 ```bash
 pip install -r requirements.txt
 ```
 
-`tkinter` es necesario para `menu_casos.py`. Si no esta disponible en tu entorno,
+`tkinter` es necesario para `menu_casos.py`. Si no está disponible en tu entorno,
 ejecuta los casos directamente por script.
 
 ---
 
-## Ejecucion
+## Ejecución
 
-### Recomendado (menu)
+### Recomendado (menú)
 
 ```bash
 python menu_casos.py
@@ -59,7 +59,7 @@ python wls_interactivo2.py
 ## Casos
 
 ### Caso 1 - Sensores
-- Problema: no todos los sensores tienen la misma precision.
+- Problema: no todos los sensores tienen la misma precisión.
 - Controles: sliders `S1..S8` y botones de escenario.
 - Idea: mayor varianza -> menor peso.
 
@@ -70,7 +70,7 @@ python wls_interactivo2.py
 
 ---
 
-## Formulas clave
+## Fórmulas clave
 
 ```text
 S_WLS = sum( w_i * (y_i - y_hat_i)^2 )
@@ -86,4 +86,4 @@ beta0 = [sum(wy) - beta1*sum(wx)] / sum(w)
 
 ---
 
-Desarrollado con ayuda de Cursor e inspeccionado por Francisco Terrones.
+Desarrollado con ayuda de Cursor y revisado por Francisco Terrones.

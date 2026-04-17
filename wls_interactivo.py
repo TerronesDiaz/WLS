@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
 ================================================================================
-RECURSO INTERACTIVO: Minimos Cuadrados Ponderados (WLS) vs OLS
+RECURSO INTERACTIVO: Mínimos Cuadrados Ponderados (WLS) vs OLS
 Autor: Francisco Terrones
-Proyecto: Metodos de Minimos Cuadrados Ponderados
+Proyecto: Métodos de Mínimos Cuadrados Ponderados
 ================================================================================
 
-Este script crea una visualizacion interactiva que permite:
-- Comparar OLS (Minimos Cuadrados Ordinarios) vs WLS (Ponderados)
+Este script crea una visualización interactiva que permite:
+- Comparar OLS (Mínimos Cuadrados Ordinarios) vs WLS (Ponderados)
 - Ajustar los pesos de cada dato con sliders
-- Observar como la recta WLS cambia segun los pesos
+- Observar cómo la recta WLS cambia según los pesos
 - Demostrar el concepto de heterocedasticidad
 
 REQUISITOS:
@@ -24,45 +24,45 @@ import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider, Button
 
 # ==============================================================================
-# CONFIGURACION DE ESTILO
+# CONFIGURACIÓN DE ESTILO
 # ==============================================================================
 plt.style.use('seaborn-v0_8-whitegrid')
 plt.rcParams['font.size'] = 13
 
 # ==============================================================================
-# DATOS DE EJEMPLO: Sensores de temperatura con diferente precision
+# DATOS DE EJEMPLO: Sensores de temperatura con diferente precisión
 # ==============================================================================
 # x = tiempo (horas)
 # y = temperatura (°C)
-# Cada sensor tiene una varianza diferente (precision distinta)
+# Cada sensor tiene una varianza diferente (precisión distinta)
 
 x = np.array([1, 2, 3, 4, 5, 6, 7, 8])
-# Sensores 4 y 5 (alta varianza) muestran mediciones mas ruidosas
+# Sensores 4 y 5 (alta varianza) muestran mediciones más ruidosas
 y = np.array([20.5, 21.8, 23.2, 26.8, 22.9, 27.3, 28.9, 30.2])
 
 # Varianzas de cada sensor:
 # - Sensores 1, 2, 3: Muy precisos (baja varianza)
 # - Sensores 4, 5: Poco precisos (alta varianza)  
-# - Sensores 6, 7, 8: Precision media
+# - Sensores 6, 7, 8: Precisión media
 sigma2_original = np.array([0.5, 0.3, 0.4, 5.0, 4.0, 1.5, 1.2, 0.8])
 
-# Pesos = 1/varianza (formula clave de WLS)
+# Pesos = 1/varianza (fórmula clave de WLS)
 w_original = 1 / sigma2_original
 
 # ==============================================================================
-# FUNCIONES MATEMATICAS
+# FUNCIONES MATEMÁTICAS
 # ==============================================================================
 
 def calcular_wls(x, y, w):
     """
-    Calcula los coeficientes beta0 (intercepto) y beta1 (pendiente) 
-    para Minimos Cuadrados Ponderados (WLS).
+    Calcula los coeficientes beta0 (intercepto) y beta1 (pendiente)
+    para Mínimos Cuadrados Ponderados (WLS).
     
-    Formula de los estimadores WLS:
+    Fórmula de los estimadores WLS:
         beta1 = [Σw * Σwxy - Σwx * Σwy] / [Σw * Σwx² - (Σwx)²]
         beta0 = [Σwy - beta1 * Σwx] / Σw
     
-    Parametros:
+    Parámetros:
         x: array de valores independientes
         y: array de valores dependientes
         w: array de pesos (w_i = 1/sigma_i²)
@@ -89,7 +89,7 @@ def calcular_wls(x, y, w):
 
 def calcular_ols(x, y):
     """
-    Calcula OLS (Minimos Cuadrados Ordinarios).
+    Calcula OLS (Mínimos Cuadrados Ordinarios).
     OLS es un caso especial de WLS donde todos los pesos = 1.
     """
     return calcular_wls(x, y, np.ones_like(x))
@@ -111,12 +111,12 @@ y_ols = beta0_ols + beta1_ols * x_line
 y_wls = beta0_wls + beta1_wls * x_line
 
 # Graficar puntos con tamaño proporcional al peso
-# Los puntos con mayor peso se ven mas grandes
+# Los puntos con mayor peso se ven más grandes
 sizes = 150 + 600 * (w_original / np.max(w_original))
 colors = plt.cm.RdYlGn(1 - sigma2_original / np.max(sigma2_original))
 scatter = ax.scatter(x, y, s=sizes, c=colors, alpha=0.8, 
                      edgecolors='black', linewidth=2, zorder=5, 
-                     label='Datos (tamano proporcional al peso)')
+                     label='Datos (tamaño proporcional al peso)')
 
 # Etiquetas de cada sensor para relacionar puntos con sliders
 for i, (x_i, y_i) in enumerate(zip(x, y)):
@@ -131,12 +131,12 @@ line_ols, = ax.plot(x_line, y_ols, 'r--', linewidth=3,
 line_wls, = ax.plot(x_line, y_wls, 'g-', linewidth=3, 
                     label=f'WLS: y = {beta0_wls:.2f} + {beta1_wls:.2f}x')
 
-# Configuracion del grafico principal
+# Configuración del gráfico principal
 ax.set_xlim(0, 9)
 ax.set_ylim(18, 33)
 ax.set_xlabel('Tiempo (horas)', fontsize=15, fontweight='bold')
 ax.set_ylabel('Temperatura (°C)', fontsize=15, fontweight='bold')
-ax.set_title('Minimos Cuadrados Ponderados (WLS) vs OLS\nRecurso Interactivo', 
+ax.set_title('Mínimos Cuadrados Ponderados (WLS) vs OLS\nRecurso Interactivo',
              fontsize=18, fontweight='bold', pad=15)
 ax.legend(loc='upper left', fontsize=13, framealpha=0.95)
 ax.grid(True, alpha=0.4)
@@ -148,7 +148,7 @@ sliders = []
 ax_sliders = []
 
 for i in range(8):
-    # Posicion de cada slider
+    # Posición de cada slider
     row = i // 4
     col = i % 4
     ax_slider = plt.axes([0.10 + col * 0.22, 0.18 - row * 0.09, 0.18, 0.035])
@@ -190,10 +190,10 @@ btn_original.label.set_fontweight('bold')
 btn_original.label.set_fontsize(12)
 
 # ==============================================================================
-# FUNCION DE ACTUALIZACION (se llama cuando se mueve un slider)
+# FUNCIÓN DE ACTUALIZACIÓN (se llama cuando se mueve un slider)
 # ==============================================================================
 def update(val=None):
-    """Actualiza la grafica cuando cambian los pesos."""
+    """Actualiza la gráfica cuando cambian los pesos."""
     # Obtener pesos actuales
     w_current = np.array([s.val for s in sliders])
     
@@ -201,11 +201,11 @@ def update(val=None):
     beta0_wls_new, beta1_wls_new = calcular_wls(x, y, w_current)
     y_wls_new = beta0_wls_new + beta1_wls_new * x_line
     
-    # Actualizar linea WLS
+    # Actualizar línea WLS
     line_wls.set_ydata(y_wls_new)
     line_wls.set_label(f'WLS: y = {beta0_wls_new:.2f} + {beta1_wls_new:.2f}x')
     
-    # Actualizar tamaños de puntos segun pesos
+    # Actualizar tamaños de puntos según pesos
     new_sizes = 150 + 600 * (w_current / np.max(w_current))
     scatter.set_sizes(new_sizes)
     
@@ -213,7 +213,7 @@ def update(val=None):
     ax.legend(loc='upper left', fontsize=13, framealpha=0.95)
     fig.canvas.draw_idle()
 
-# Conectar sliders a la funcion de actualizacion
+# Conectar sliders a la función de actualización
 for slider in sliders:
     slider.on_changed(update)
 
@@ -234,7 +234,7 @@ def igualar_pesos(event):
 
 def destacar_precisos(event):
     """
-    Configuracion que destaca los datos precisos.
+    Configuración que destaca los datos precisos.
     Los sensores 1,2,3 (precisos) tienen peso alto.
     Los sensores 4,5 (imprecisos) tienen peso bajo.
     """
@@ -261,12 +261,12 @@ info_text = (
     "DATOS DEL EJEMPLO:\n"
     "  Sensores 1,2,3: Muy precisos (baja varianza, alto peso)\n"
     "  Sensores 4,5:   Poco precisos (alta varianza, bajo peso)\n"
-    "  Sensores 6,7,8: Precision media\n\n"
+    "  Sensores 6,7,8: Precisión media\n\n"
     "INSTRUCCIONES:\n"
     "  - Ajusta los sliders para cambiar los pesos w_i\n"
-    "  - Observa como la recta WLS se mueve\n"
-    "  - Compara con OLS (linea roja punteada)\n\n"
-    "FORMULA CLAVE:  w_i = 1 / sigma_i^2"
+    "  - Observa cómo la recta WLS se mueve\n"
+    "  - Compara con OLS (línea roja punteada)\n\n"
+    "FÓRMULA CLAVE:  w_i = 1 / sigma_i^2"
 )
 
 props = dict(boxstyle='round,pad=0.6', facecolor='#ecf0f1', 
@@ -279,7 +279,7 @@ ax.text(0.98, 0.02, info_text, transform=ax.transAxes, fontsize=11,
 # MOSTRAR RESULTADOS INICIALES
 # ==============================================================================
 print("=" * 70)
-print("  RECURSO INTERACTIVO: Minimos Cuadrados Ponderados (WLS)")
+print("  RECURSO INTERACTIVO: Mínimos Cuadrados Ponderados (WLS)")
 print("=" * 70)
 print()
 print("Resultados iniciales:")
